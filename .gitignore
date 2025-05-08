@@ -1,0 +1,6 @@
+.gen
+.srcs
+.Xil
+*.log
+*.jou
+impl
