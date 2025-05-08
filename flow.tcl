@@ -19,7 +19,7 @@ set_property top $top_module_name [current_fileset]
 
 # # step#2: Run synthesis, report utilization and timing estimates, write checkpoint design.
 
-synth_design -top $top_module_name -verilog_define SYNTHESIS
+synth_design -top $top_module_name
 write_checkpoint -force $outputDir/post_synth
 report_timing_summary -file $outputDir/post_synth_timing_summary.rpt
 report_power -file $outputDir/post_synth_power.rpt
