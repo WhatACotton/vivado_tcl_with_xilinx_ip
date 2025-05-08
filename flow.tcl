@@ -1,9 +1,7 @@
 # step#0: Define output directory location.
-set current_dir [pwd]
-create_project -in_memory
-set obj [current_project]
-set outputDir "$current_dir/impl"
-
+set top_module_name top
+set outputDir ./impl
+file mkdir $outputDir
 set_part xc7z020clg400-1
  
 # step#1: Setup design sources and constraints.
@@ -12,7 +10,6 @@ upgrade_ip  -vlnv xilinx.com:ip:clk_wiz:6.0  [get_ips clk_core]
 
 generate_target all [get_ips clk_core]  -force
 
-update_compile_order -fileset [current_fileset]
 read_verilog -sv [ glob ./src/hdl/*.sv ]
 read_verilog  [ glob .gen/sources_1/ip/clk_core/*.v ]
 read_xdc [ glob ./src/constr/*.xdc]
@@ -52,5 +49,4 @@ report_drc -file $outputDir/post_imp_drc.rpt
 write_verilog -force $outputDir/top_impl_netlist.v
 write_xdc -no_fixed_only -force $outputDir/top_impl.xdc
 
-update_compile_order -fileset sim_1
 write_bitstream -force $outputDir/$top_module_name.bit
